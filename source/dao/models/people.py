@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class People:
     """
     Classe que representa a tabela People do banco de dados, carregando seus atributos.
@@ -10,4 +11,3 @@ class People:
         cls.nome = nome
         cls.cpf = cpf
         cls.dt_nasc = dt_nasc
-

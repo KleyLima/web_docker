@@ -12,6 +12,10 @@ class DB:
         self.password = 'kleysql'
 
     def connect(self):
+        """
+        Método que realiza a conexão com o banco de dados.
+        :return: Retorna um objeto conexão para manipulação do banco.
+        """
         conn = pymysql.connect(host=self.host, user=self.user, password=self.password, db=self.db, charset='utf8mb4',
                                cursorclass=pymysql.cursors.DictCursor)
         conn.autocommit(True)
@@ -19,4 +23,4 @@ class DB:
 
 
 if __name__ == '__main__':
-   DB().connect()
+    DB().connect()
