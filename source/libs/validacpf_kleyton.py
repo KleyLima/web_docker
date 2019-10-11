@@ -48,6 +48,7 @@ class ValidaCPF:
 
 
 if __name__ == '__main__':
-    print("CPF: {}".format(ValidaCPF(argv[1]).retira_formatacao()))
-    ValidaCPF(argv[1]).valida_cpf()
+    # print("CPF: {}".format(ValidaCPF(argv[1]).retira_formatacao()))
+    # ValidaCPF(argv[1]).valida_cpf()
+    print(ValidaCPF('45815372-072').valida_cpf())
 
