@@ -9,7 +9,7 @@ body {
 	text-align: center;
 }
 
-p, h1, h2 {
+p, h1, h2, h3 {
 	display: inline-block;
 	color: #fff;
 }
@@ -24,6 +24,10 @@ p {
 
 h2 {
 	background: #8600f7;
+}
+
+h3 {
+    background: #42f554;
 }
 
 button{

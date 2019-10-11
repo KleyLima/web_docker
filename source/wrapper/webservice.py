@@ -28,11 +28,9 @@ class Handler:
     async def post(self, request):
         data = await request.post()
         cpf = data.get('cpf')
-        note = PeopleService().check_cpf(cpf=cpf)
-        #nome, dt_nasc = note.nome, note.dt_nasc
-        print(note)
+        asw = PeopleService().check_cpf(cpf=cpf)
         page = self.env.get_template('resposta.html')
-        out = page.render(resp=note)
+        out = page.render(resp=asw)
         return web.Response(text=out, content_type='html')
 
     async def home_page(self, request):

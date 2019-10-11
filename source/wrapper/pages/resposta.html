@@ -21,11 +21,12 @@
 		</form>
 
 		<dl>
-{% for key, value in resp.items() %}
-			{% if key == 'nome' or key == 'dt_nasc' or  key == 'Erro' %}
-    			<h2>{{value|e}}</h2><br>
-			{% endif %}
-{% endfor %}
-</dl>
+			{% for key, value in resp.items() %}
+				{% if key == 'nome' or key == 'dt_nasc' or  key == 'Erro' %}
+    				<h3>{{value|e}}</h3><br>
+				{% endif %}
+			{% endfor %}
+		</dl>
+
 	</body>
 </html>
