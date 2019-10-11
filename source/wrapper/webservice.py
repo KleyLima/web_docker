@@ -2,6 +2,7 @@
 
 from aiohttp import web
 import json
+from source.service.people_service import PeopleService
 
 
 class Handler:
@@ -17,14 +18,15 @@ class Handler:
         """
         app = web.Application()
         app.add_routes([web.post('/', self.post),
-                        web.post('/consulta_dtnasc/{cpf}', self.post)])
+                        web.post('/consulta_dtnasc/', self.post)])
         # app.router.add_static('/pages/', path='pages/',
         #                       append_version=False)  # Adiciona rota 'interna' para arquivos dentro do projeto.
         web.run_app(app, host='localhost', port=7979)
 
     async def post(self, request):
-        cpf = request.match_info['cpf']
-        note = {"id": "Kley", "cpf": "{}".format(cpf)}
+        data = await request.json()
+        cpf = data['cpf']
+        note = PeopleService().check_cpf(cpf=cpf)
         note = json.dumps(note)
         return web.Response(status=200, body=note, content_type='application/json')
 

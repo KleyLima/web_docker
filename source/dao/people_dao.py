@@ -14,4 +14,3 @@ class PeopleDAO(DB):
 
 if __name__ == '__main__':
     print(PeopleDAO().select_people_by_cpf('45815372072'))
-
