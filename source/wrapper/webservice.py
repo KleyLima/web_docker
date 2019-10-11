@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from aiohttp import web
-import json
 from source.service.people_service import PeopleService
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -21,21 +20,19 @@ class Handler:
         app = web.Application()
         app.add_routes([web.get('/', self.home_page),
                         web.post('/consulta_dtnasc/', self.post)])
-        app.router.add_static('/pages/', path='pages/',
-                              append_version=False)
-        app.router.add_static('/consulta_dtnasc/pages', path='pages/',
-                              append_version=False)
-        self.env = Environment(loader=PackageLoader('webservice', 'pages'),
-                               autoescape=select_autoescape(['html']))
+        app.router.add_static('/pages/', path='pages/', append_version=False)
+        app.router.add_static('/consulta_dtnasc/pages', path='pages/', append_version=False)
+        self.env = Environment(loader=PackageLoader('webservice', 'pages'), autoescape=select_autoescape(['html']))
         web.run_app(app, host='localhost', port=7979)
 
     async def post(self, request):
         data = await request.post()
         cpf = data.get('cpf')
         note = PeopleService().check_cpf(cpf=cpf)
-        note = json.dumps(note)
-        page = self.env.get_template('index1.html')
-        out = page.render(nota=note)
+        #nome, dt_nasc = note.nome, note.dt_nasc
+        print(note)
+        page = self.env.get_template('resposta.html')
+        out = page.render(resp=note)
         return web.Response(text=out, content_type='html')
 
     async def home_page(self, request):
