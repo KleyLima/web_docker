@@ -17,15 +17,14 @@ class Handler:
         port 7979
         """
         app = web.Application()
-        app.add_routes([web.post('/', self.post),
-                        web.post('/consulta_dtnasc/', self.post)])
+        app.add_routes([web.post('/consulta_dtnasc/', self.post)])
         # app.router.add_static('/pages/', path='pages/',
         #                       append_version=False)  # Adiciona rota 'interna' para arquivos dentro do projeto.
         web.run_app(app, host='localhost', port=7979)
 
     async def post(self, request):
-        data = await request.json()
-        cpf = data['cpf']
+        data = await request.post()
+        cpf = data.get('cpf')
         note = PeopleService().check_cpf(cpf=cpf)
         note = json.dumps(note)
         return web.Response(status=200, body=note, content_type='application/json')
