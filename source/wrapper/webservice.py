@@ -23,7 +23,7 @@ class Handler:
         app.router.add_static('/pages/', path='pages/', append_version=False)
         app.router.add_static('/consulta_dtnasc/pages', path='pages/', append_version=False)
         self.env = Environment(loader=PackageLoader('webservice', 'pages'), autoescape=select_autoescape(['html']))
-        web.run_app(app, host='localhost', port=7979)
+        web.run_app(app, host='0.0.0.0', port=7979)
 
     async def post(self, request):
         data = await request.post()
