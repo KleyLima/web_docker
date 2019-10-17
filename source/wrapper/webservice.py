@@ -19,13 +19,19 @@ class Handler:
         """
         app = web.Application()
         app.add_routes([web.get('/', self.home_page),
-                        web.post('/consulta_dtnasc/', self.post)])
+                        web.get('/consulta_dtnasc/{cpf}', self.get_cpf),
+                        web.post('/consulta_dtnasc/', self.post_cpf)])
         app.router.add_static('/pages/', path='pages/', append_version=False)
         app.router.add_static('/consulta_dtnasc/pages', path='pages/', append_version=False)
         self.env = Environment(loader=PackageLoader('webservice', 'pages'), autoescape=select_autoescape(['html']))
         web.run_app(app, host='0.0.0.0', port=7979)
 
-    async def post(self, request):
+    async def get_cpf(self, request):
+        cpf = request.match_info['cpf']
+        #return web.Response(text=PeopleService().check_cpf(cpf=cpf), content_type='text/plain')
+        return web.json_response(PeopleService().check_cpf(cpf=cpf))
+
+    async def post_cpf(self, request):
         data = await request.post()
         cpf = data.get('cpf')
         asw = PeopleService().check_cpf(cpf=cpf)

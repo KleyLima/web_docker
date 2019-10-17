@@ -6,14 +6,13 @@ from source.dao.mapper.people_mapper import PeopleMapper
 
 class PeopleService:
     def check_cpf(self, cpf):
-        #TODO: cpf valido, porém nao esta no banco
         if ValidaCPF(cpf).valida_cpf():
             result = PeopleDAO().select_people_by_cpf(cpf=ValidaCPF(cpf).retira_formatacao())
             if not result:
-                return {"Erro": "CPF Válido porém não consta na base."}
-            return PeopleMapper().map(result=result)
+                return {"Erro": "CPF Valido porem nao consta na base."}
+            #return PeopleMapper().map(result=result)
+            return PeopleMapper().dicter(result=result)
 
         else:
-            #TODO: cpf invalido
-            resp = {"Erro": "CPF Inválido para consulta."}
+            resp = {"Erro": "CPF Invalido para consulta."}
             return resp
